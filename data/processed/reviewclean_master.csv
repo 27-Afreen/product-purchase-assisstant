@@ -1,0 +1,14 @@
+review_id,product_id,platform_name,rating,review_text_clean
+1,101,Amazon,5,very good for dry skin and absorbs quickly
+2,101,Walmart,4,gentle cleanser and does not irritate skin
+3,101,Ulta,2,caused dryness after few days of use
+4,102,Amazon,5,helped reduce pigmentation and brightened skin
+5,102,YesStyle,4,lightweight serum works well for acne marks
+6,102,Amazon,3,results are slow but skin feels smooth
+7,103,Amazon,5,excellent picture quality and sound is clear
+8,103,Walmart,4,good smart tv with easy setup
+9,103,Target,2,remote stopped working after few weeks
+10,104,Amazon,5,very powerful vacuum cleaner cleans deeply
+11,104,Costco,4,good suction but slightly noisy
+12,105,Amazon,5,microwave heats food quickly and evenly
+13,105,Walmart,3,average performance and takes longer time

@@ -3,31 +3,36 @@ import axios from "axios";
 import "./App.css";
 
 function App() {
-  const [query, setQuery] = useState("");
+  const [message, setMessage] = useState("");
+  const [reply, setReply] = useState("");
+  const [recommendations, setRecommendations] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [result, setResult] = useState(null);
   const [error, setError] = useState("");
 
-  const handleSearch = async () => {
-    if (!query.trim()) {
-      setError("Please enter a product query.");
-      setResult(null);
-      return;
-    }
+  const handleSend = async () => {
+    if (!message.trim()) return;
+
+    setLoading(true);
+    setError("");
+    setReply("");
+    setRecommendations([]);
 
     try {
-      setLoading(true);
-      setError("");
-      setResult(null);
-
-      const response = await axios.post("http://127.0.0.1:8000/recommend", {
-        query: query,
+      const response = await axios.post("http://127.0.0.1:8000/chat", {
+        message: message,
       });
 
-      setResult(response.data);
+      setReply(response.data.reply);
+      setRecommendations(response.data.recommendations || []);
     } catch (err) {
-      setError("Could not connect to backend API. Make sure FastAPI is running.");
-      setResult(null);
+      console.error("Backend error:", err);
+      if (err.response) {
+        setError(`Backend error: ${err.response.status}`);
+      } else if (err.request) {
+        setError("Request sent, but no response from backend.");
+      } else {
+        setError("Frontend error while making request.");
+      }
     } finally {
       setLoading(false);
     }
@@ -35,123 +40,50 @@ function App() {
 
   return (
     <div className="app">
-      <div className="container">
-        <h1>Product Purchase Assistant</h1>
-        <p className="subtitle">
-          Quality-aware recommendations across skincare and home appliances
-        </p>
+      <h1>Product Purchase Assistant</h1>
 
-        <div className="search-box">
-          <input
-            type="text"
-            placeholder="Try: best smart tv under 1000 or best serum for pigmentation under 20 on yesstyle"
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-          />
-          <button onClick={handleSearch} disabled={loading}>
-            {loading ? "Searching..." : "Get Recommendation"}
-          </button>
-        </div>
+      <div className="chat-box">
+        <textarea
+          placeholder="Ask for a product... example: I need a smart tv under 500 from Amazon"
+          value={message}
+          onChange={(e) => setMessage(e.target.value)}
+          rows="4"
+        />
 
-        {error && <div className="error-box">{error}</div>}
-
-        {result?.message && (
-          <div className="info-box">
-            <strong>Message:</strong> {result.message}
-          </div>
-        )}
-
-        {result?.detected_preferences && (
-          <div className="card">
-            <h2>Detected Preferences</h2>
-            <p><strong>Domain:</strong> {result.detected_preferences.domain || "Not detected"}</p>
-            <p><strong>Category:</strong> {result.detected_preferences.category || "Not detected"}</p>
-            <p>
-              <strong>Platforms:</strong>{" "}
-              {result.detected_preferences.platforms?.length
-                ? result.detected_preferences.platforms.join(", ")
-                : "Not detected"}
-            </p>
-            <p>
-              <strong>Skin Types:</strong>{" "}
-              {result.detected_preferences.skin_types?.length
-                ? result.detected_preferences.skin_types.join(", ")
-                : "Not detected"}
-            </p>
-            <p>
-              <strong>Needs:</strong>{" "}
-              {result.detected_preferences.needs?.length
-                ? result.detected_preferences.needs.join(", ")
-                : "Not detected"}
-            </p>
-            <p>
-              <strong>Budget:</strong>{" "}
-              {result.detected_preferences.budget_high !== null &&
-              result.detected_preferences.budget_high !== undefined
-                ? `Under $${result.detected_preferences.budget_high}`
-                : "Not detected"}
-            </p>
-          </div>
-        )}
-
-        {result?.best_for_need && (
-          <div className="card">
-            <h2>Best Product For Your Need</h2>
-            <p><strong>Product:</strong> {result.best_for_need.product_name}</p>
-            <p><strong>Brand:</strong> {result.best_for_need.brand}</p>
-            <p><strong>Platform:</strong> {result.best_for_need.platform}</p>
-            <p><strong>Domain:</strong> {result.best_for_need.domain}</p>
-            <p><strong>Category:</strong> {result.best_for_need.category}</p>
-            <p><strong>Price:</strong> ${result.best_for_need.price}</p>
-            <p><strong>Rating:</strong> {result.best_for_need.rating}</p>
-            <p><strong>Review Count:</strong> {result.best_for_need.review_count}</p>
-            <p><strong>Sentiment Score:</strong> {result.best_for_need.sentiment_score}</p>
-            <p><strong>Quality Score:</strong> {result.best_for_need.quality_score}</p>
-            <p><strong>Match Score:</strong> {result.best_for_need.match_score}</p>
-            <p><strong>Use Cases:</strong> {result.best_for_need.use_cases}</p>
-          </div>
-        )}
-
-        {result?.best_overall && (
-          <div className="card">
-            <h2>Best Overall Product</h2>
-            <p><strong>Product:</strong> {result.best_overall.product_name}</p>
-            <p><strong>Brand:</strong> {result.best_overall.brand}</p>
-            <p><strong>Platform:</strong> {result.best_overall.platform}</p>
-            <p><strong>Domain:</strong> {result.best_overall.domain}</p>
-            <p><strong>Category:</strong> {result.best_overall.category}</p>
-            <p><strong>Price:</strong> ${result.best_overall.price}</p>
-            <p><strong>Rating:</strong> {result.best_overall.rating}</p>
-            <p><strong>Review Count:</strong> {result.best_overall.review_count}</p>
-            <p><strong>Sentiment Score:</strong> {result.best_overall.sentiment_score}</p>
-            <p><strong>Quality Score:</strong> {result.best_overall.quality_score}</p>
-            <p><strong>Overall Score:</strong> {result.best_overall.overall_score}</p>
-            <p><strong>Use Cases:</strong> {result.best_overall.use_cases}</p>
-          </div>
-        )}
-
-        {result?.top_matches?.length > 0 && (
-          <div className="card">
-            <h2>Top Matches</h2>
-            <div className="matches">
-              {result.top_matches.map((item, index) => (
-                <div key={index} className="match-item">
-                  <h3>{item.product_name}</h3>
-                  <p><strong>Brand:</strong> {item.brand}</p>
-                  <p><strong>Platform:</strong> {item.platform}</p>
-                  <p><strong>Domain:</strong> {item.domain}</p>
-                  <p><strong>Category:</strong> {item.subcategory}</p>
-                  <p><strong>Price:</strong> ${item.price_discounted}</p>
-                  <p><strong>Rating:</strong> {item.rating_avg}</p>
-                  <p><strong>Review Count:</strong> {item.review_count}</p>
-                  <p><strong>Quality Score:</strong> {item.quality_score}</p>
-                  <p><strong>Match Score:</strong> {item.match_score}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
+        <button onClick={handleSend} disabled={loading}>
+          {loading ? "Loading..." : "Send"}
+        </button>
       </div>
+
+      {error && <p className="error">{error}</p>}
+
+      {reply && (
+        <div className="response-box">
+          <h2>Assistant Reply</h2>
+          <p>{reply}</p>
+        </div>
+      )}
+
+      {recommendations.length > 0 && (
+        <div className="recommendations">
+          <h2>Recommendations</h2>
+          {recommendations.map((product) => (
+            <div key={product.id} className="card">
+              <h3>{product.name}</h3>
+              <p><strong>Category:</strong> {product.category}</p>
+              <p><strong>Brand:</strong> {product.brand}</p>
+              <p><strong>Platform:</strong> {product.platform}</p>
+              <p><strong>Price:</strong> ${product.price}</p>
+              <p><strong>Rating:</strong> {product.rating}</p>
+              {product.link && (
+                <a href={product.link} target="_blank" rel="noreferrer">
+                  View Product
+                </a>
+              )}
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 }

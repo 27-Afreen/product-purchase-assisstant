@@ -1,93 +1,92 @@
 body {
   margin: 0;
   font-family: Arial, sans-serif;
-  background: #f4f7fb;
-  color: #1f2937;
+  background: #f4f6f8;
 }
 
 .app {
-  min-height: 100vh;
-  padding: 30px 16px;
-}
-
-.container {
-  max-width: 1100px;
-  margin: 0 auto;
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 20px;
 }
 
 h1 {
-  margin-bottom: 8px;
   text-align: center;
+  color: #222;
 }
 
-.subtitle {
-  text-align: center;
-  margin-bottom: 24px;
-  color: #4b5563;
-}
-
-.search-box {
+.chat-box {
   display: flex;
+  flex-direction: column;
   gap: 12px;
   margin-bottom: 24px;
 }
 
-.search-box input {
-  flex: 1;
-  padding: 14px;
-  border: 1px solid #d1d5db;
-  border-radius: 10px;
+textarea {
+  width: 100%;
+  padding: 12px;
   font-size: 16px;
+  resize: vertical;
+  border: 1px solid #ccc;
+  border-radius: 8px;
 }
 
-.search-box button {
-  padding: 14px 18px;
-  border: none;
-  border-radius: 10px;
-  background: #2563eb;
-  color: white;
+button {
+  width: 140px;
+  padding: 12px;
   font-size: 16px;
+  border: none;
+  background: #222;
+  color: white;
+  border-radius: 8px;
   cursor: pointer;
 }
 
-.search-box button:disabled {
-  background: #93c5fd;
+button:hover {
+  background: #444;
+}
+
+button:disabled {
+  background: #888;
   cursor: not-allowed;
+}
+
+.response-box,
+.recommendations {
+  margin-top: 24px;
+}
+
+.response-box {
+  background: white;
+  padding: 16px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
 .card {
   background: white;
-  border-radius: 16px;
-  padding: 20px;
-  margin-bottom: 18px;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
-}
-
-.error-box {
-  background: #fee2e2;
-  color: #991b1b;
-  padding: 14px;
-  border-radius: 10px;
-  margin-bottom: 18px;
-}
-
-.info-box {
-  background: #e0f2fe;
-  color: #0c4a6e;
-  padding: 14px;
-  border-radius: 10px;
-  margin-bottom: 18px;
-}
-
-.matches {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 16px;
-}
-
-.match-item {
-  border: 1px solid #e5e7eb;
-  border-radius: 14px;
   padding: 16px;
-  background: #fafafa;
+  margin-top: 16px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.card h3 {
+  margin-top: 0;
+}
+
+.card a {
+  display: inline-block;
+  margin-top: 8px;
+  color: #0066cc;
+  text-decoration: none;
+}
+
+.card a:hover {
+  text-decoration: underline;
+}
+
+.error {
+  color: red;
+  font-weight: bold;
 }

@@ -1,1 +1,14 @@
-review_id,product_id,clean_text,tokens,text_length,sentiment_label,sentiment_score
+review_id,sentiment_label,sentiment_score
+1,POSITIVE,0.95
+2,POSITIVE,0.90
+3,NEGATIVE,0.40
+4,POSITIVE,0.96
+5,POSITIVE,0.92
+6,NEUTRAL,0.60
+7,POSITIVE,0.97
+8,POSITIVE,0.91
+9,NEGATIVE,0.35
+10,POSITIVE,0.96
+11,POSITIVE,0.88
+12,POSITIVE,0.95
+13,NEUTRAL,0.55

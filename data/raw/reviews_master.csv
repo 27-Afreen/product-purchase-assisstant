@@ -1,4 +1,4 @@
-review_id,product_id,platform,domain,subcategory,review_title,review_text,rating,review_date,reviewer_name,verified_purchase,helpful_votes
+review_id,product_id,platform_name,domain,subcategory,review_title,review_text,rating,review_date,reviewer_name,verified_purchase,helpful_votes
 R001,P001,YesStyle,Skincare,Cleanser,Very gentle,"This cleanser feels soft and does not dry my skin.",5,2026-03-20,Alice,True,3
 R002,P002,YesStyle,Skincare,Serum,Nice glow,"It helped with brightness but takes time to show results.",4,2026-03-19,Sara,True,1
 R003,P003,YesStyle,Skincare,Moisturizer,Perfect for irritation,"Very calming and hydrating. Good for sensitive skin.",5,2026-03-18,Mina,True,4
