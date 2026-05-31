@@ -1,0 +1,7 @@
+flask
+groq
+python-dotenv
+requests
+torch
+transformers
+safetensors

@@ -1,0 +1,8 @@
+.env
+__pycache__/
+*.pyc
+.DS_Store
+app/wisebuy.db
+*.sqlite
+*.sqlite3
+scraper/sentiment_model/model.safetensors
