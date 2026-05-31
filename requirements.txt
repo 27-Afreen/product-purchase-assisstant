@@ -5,3 +5,12 @@ requests
 torch
 transformers
 safetensors
+pandas
+numpy
+beautifulsoup4
+lxml
+tqdm
+scikit-learn
+matplotlib
+nltk
+textblob

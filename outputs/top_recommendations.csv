@@ -1,0 +1,2 @@
+product_id,platform,brand,product_name,subcategory,price_discounted,rating_avg,skin_type,target_concerns,avg_sentiment_score,best_for_need_score,best_overall_score,explanation
+YS003,YesStyle,Etude,SoonJung 2x Barrier Intensive Cream,Moisturizer,17.99,4.8,Sensitive;Dry,Redness;Barrier repair,0.3333333333333333,8.413333333333334,3.86,"high rating of 4.8, positive sentiment score of 0.33, matches your requested category (Moisturizer), suitable for dry skin, suitable for sensitive skin, targets barrier repair, targets redness"

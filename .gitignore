@@ -6,3 +6,7 @@ app/wisebuy.db
 *.sqlite
 *.sqlite3
 scraper/sentiment_model/model.safetensors
+node_modules/
+dist/
+venv/
+.env/

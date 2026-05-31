@@ -1,0 +1,4 @@
+review_id,product_id,clean_text,tokens,text_length,sentiment_label,sentiment_score
+R001,YS001,this cleanser feels soft and does not dry my skin,this cleanser feels soft and does not dry my skin,10,neutral,0.06666666666666667
+R002,YS002,it helped with brightness but takes time to show results,it helped with brightness but takes time to show results,10,neutral,0.0
+R003,YS003,very calming and hydrating good for sensitive skin,very calming and hydrating good for sensitive skin,8,positive,0.3333333333333333
