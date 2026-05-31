@@ -22,6 +22,7 @@ projectDemo/
   chatbot/
     chatbot.py              # CLI chatbot prototype
   docs/
+    WISEBUY Final Paper.pdf
     system-architecture.svg
     user-workflow.svg
   scraper/
@@ -82,6 +83,12 @@ Then open `http://127.0.0.1:5000`.
 ```bash
 python chatbot/chatbot.py
 ```
+
+## Documentation
+
+- [WISEBUY Final Paper](docs/WISEBUY%20Final%20Paper.pdf)
+- [System Architecture Diagram](docs/system-architecture.svg)
+- [User Workflow Diagram](docs/user-workflow.svg)
 
 ## Sentiment Model Note
 
